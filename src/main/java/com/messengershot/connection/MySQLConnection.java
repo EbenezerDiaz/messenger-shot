@@ -1,7 +1,10 @@
 package com.messengershot.connection;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -12,10 +15,10 @@ public class MySQLConnection {
     public Connection getConnection(){
         Connection connection = null;
 
-        try(FileInputStream f = new FileInputStream("db.properties")){
+        try(InputStream input = getClass().getResourceAsStream("/config_db.properties") ){
 
             Properties pros = new Properties();
-            pros.load(f);
+            pros.load(input);
 
             // assign db parameters
             String url       = pros.getProperty("url");
@@ -29,6 +32,7 @@ public class MySQLConnection {
 
         }catch(IOException e) {
         System.out.println(e.getMessage());
+            System.out.println(e);
 
         }catch (SQLException sqlException){
             System.err.println("Error Connection....");
