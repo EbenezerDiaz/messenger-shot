@@ -10,8 +10,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-public class MySQLConnection {
+public class MySQLConnection implements DBConnection {
 
+    @Override
     public Connection getConnection(){
         Connection connection = null;
 
